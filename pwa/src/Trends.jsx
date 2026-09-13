@@ -18,6 +18,33 @@ export default function Trends({ urnList, metadata, corpusMinYear, corpusMaxYear
   const [rawData, setRawData] = useState([]);
   const [wordsUsed, setWordsUsed] = useState([]);
   const [hiddenLines, setHiddenLines] = useState({});
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+  const [searchHistory, setSearchHistory] = useState(() => {
+    try {
+      const saved = localStorage.getItem('bbi_trends_history');
+      return saved ? JSON.parse(saved) : [];
+    } catch { return []; }
+  });
+
+  const addToHistory = (term) => {
+    const cleanTerm = term.trim();
+    if (!cleanTerm) return;
+    setSearchHistory(prev => {
+      const updated = [cleanTerm, ...prev.filter(t => t !== cleanTerm)].slice(0, 10);
+      localStorage.setItem('bbi_trends_history', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const removeFromHistory = (term, e) => {
+    e.stopPropagation();
+    setSearchHistory(prev => {
+      const updated = prev.filter(t => t !== term);
+      localStorage.setItem('bbi_trends_history', JSON.stringify(updated));
+      return updated;
+    });
+  };
 
   const toggleLine = (e) => {
     const dataKey = e.dataKey;
@@ -121,6 +148,7 @@ export default function Trends({ urnList, metadata, corpusMinYear, corpusMaxYear
     }
     setError('');
     setLoading(true);
+    addToHistory(search);
 
     try {
       // 1. Filter URNs by year
@@ -160,15 +188,39 @@ export default function Trends({ urnList, metadata, corpusMinYear, corpusMaxYear
       <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-[var(--panel-warm)] p-6 rounded-xl shadow-sm">
         
         {/* Søkefelt */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
           <label className="font-semibold text-sm">Ord (komma-separert)</label>
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onFocus={() => setIsDropdownOpen(true)}
+            onBlur={() => setIsDropdownOpen(false)}
             className="px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
             title="Skriv inn ord adskilt med komma."
           />
+          {isDropdownOpen && searchHistory.length > 0 && (
+            <div 
+              className="absolute top-[100%] left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto"
+              onMouseDown={(e) => e.preventDefault()}
+            >
+              {searchHistory.map(term => (
+                <div 
+                  key={term} 
+                  className="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors"
+                  onClick={() => { setSearch(term); setIsDropdownOpen(false); }}
+                >
+                  <span className="font-medium text-gray-700 truncate">{term}</span>
+                  <button 
+                    type="button" 
+                    onClick={(e) => removeFromHistory(term, e)} 
+                    className="text-gray-400 hover:text-red-500 px-2 py-1 leading-none rounded text-lg font-bold"
+                    title="Slett fra historikk"
+                  >&times;</button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Periode */}

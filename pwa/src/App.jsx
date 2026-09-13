@@ -87,23 +87,23 @@ export default function App() {
         </button>
       </div>
 
-      {activeTab === 'konkordans' && (
+      <div className={activeTab === 'konkordans' ? 'block' : 'hidden'}>
         <Concordance 
           urnList={urnList} 
           metadata={metadata} 
           corpusMinYear={corpusMinYear} 
           corpusMaxYear={corpusMaxYear} 
         />
-      )}
+      </div>
 
-      {activeTab === 'trender' && (
+      <div className={activeTab === 'trender' ? 'block' : 'hidden'}>
         <Trends 
           urnList={urnList} 
           metadata={metadata} 
           corpusMinYear={corpusMinYear} 
           corpusMaxYear={corpusMaxYear} 
         />
-      )}
+      </div>
     </div>
   );
 }
