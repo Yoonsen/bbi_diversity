@@ -3,6 +3,7 @@ import { Loader2, BookOpen } from 'lucide-react';
 import { loadMetadata } from './utils';
 import Concordance from './Concordance';
 import Trends from './Trends';
+import CorpusView from './CorpusView';
 import './index.css';
 
 export default function App() {
@@ -15,15 +16,16 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('konkordans');
 
   useEffect(() => {
-    loadMetadata().then(meta => {
-      setMetadata(meta);
-      const urns = Object.keys(meta);
-      setUrnList(urns);
+    loadMetadata().then(({ metaMap, urnList }) => {
+      setMetadata(metaMap);
+      setUrnList(urnList);
+      
+      const urns = urnList;
       
       let min = 9999;
       let max = 0;
       for (const urn of urns) {
-        const year = parseInt(meta[urn].year);
+        const year = parseInt(metaMap[urn].year);
         if (!isNaN(year)) {
           if (year < min) min = year;
           if (year > max) max = year;
@@ -85,6 +87,16 @@ export default function App() {
         >
           Trender (N-gram)
         </button>
+        <button 
+          onClick={() => setActiveTab('korpus')}
+          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            activeTab === 'korpus' 
+              ? 'bg-[var(--primary)] text-white' 
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
+        >
+          Korpus
+        </button>
       </div>
 
       <div className={activeTab === 'konkordans' ? 'block' : 'hidden'}>
@@ -102,6 +114,13 @@ export default function App() {
           metadata={metadata} 
           corpusMinYear={corpusMinYear} 
           corpusMaxYear={corpusMaxYear} 
+        />
+      </div>
+
+      <div className={activeTab === 'korpus' ? 'block' : 'hidden'}>
+        <CorpusView 
+          urnList={urnList} 
+          metadata={metadata} 
         />
       </div>
     </div>

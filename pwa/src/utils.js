@@ -10,13 +10,18 @@ export const loadMetadata = async () => {
       header: true,
       skipEmptyLines: true,
       complete: (results) => {
-        // Create a map of URN to metadata object for fast lookup O(1)
         const metaMap = {};
+        const urnList = [];
         for (const row of results.data) {
-          if (row.urn) metaMap[row.urn] = row;
-          if (row.dhlabid) metaMap[row.dhlabid] = row;
+          if (row.urn) {
+            metaMap[row.urn] = row;
+            urnList.push(row.urn);
+          }
+          if (row.dhlabid) {
+            metaMap[row.dhlabid] = row;
+          }
         }
-        resolve(metaMap);
+        resolve({ metaMap, urnList });
       }
     });
   });
