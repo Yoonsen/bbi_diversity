@@ -13,6 +13,13 @@ export const loadMetadata = async () => {
         const metaMap = {};
         const urnList = [];
         for (const row of results.data) {
+          const kristinVal = (row.kristin || '').trim();
+          if (kristinVal.toLowerCase() === 'ut') {
+            continue;
+          }
+          if (kristinVal) {
+            row.literaryform = kristinVal;
+          }
           if (row.urn) {
             metaMap[row.urn] = row;
             urnList.push(row.urn);
