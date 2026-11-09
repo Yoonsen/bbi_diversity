@@ -1,6 +1,6 @@
 # Luminonskjema v2 – utkast til diskusjon
 
-*Versjon `v2.1-utkast-2026-11-09`. Generert fra `scripts/luminon_schema_v2.py` – endringer gjøres der.*
+*Versjon `v2.2-utkast-2026-11-09`. Generert fra `scripts/luminon_schema_v2.py` – endringer gjøres der.*
 
 ## Makroklasser
 
@@ -19,7 +19,7 @@ Makroklassene var tidligere bare definert i figurkoden (`make_abstract_figures_v
 
 | Kategori | Makro | Beskrivelse |
 |---|---|---|
-| `levd_praksis` | lived | Faktisk religiøs praksis, tro, bønn, ritual eller aktiv deltakelse (f.eks. «går i moskeen hver fredag», «feiret sabbat»). |
+| `levd_praksis` | lived | Faktisk religiøs praksis, tro, bønn, ritual eller aktiv deltakelse – også fellesskap rundt en religiøs handling og karakterer som besøker eller vil besøke bygget (f.eks. «går i moskeen hver fredag», «måltid etter bønnen», «ta meg med i moskeen», «feiret sabbat»). |
 | `identitetsmarkør` | thematic | Sosial, etnisk eller kulturell tilhørighet uten fokus på trosutøvelsen (f.eks. «en muslimsk jente», «han er jøde»). |
 | `romlig_kulisse` | backdrop | Bygning eller markør som fysisk kulisse, veimarkør eller stedsangivelse (f.eks. «gikk forbi moskeen»). |
 | `historisk_tematisk` | thematic | Historisk ramme (2. verdenskrig/Holocaust o.l.), konflikt, fordommer eller overordnet tematisk omtale. |
@@ -89,7 +89,7 @@ Hver underkategori hører til én gammel kategori. Kategori og makroklasse fra a
 | religion / `identitetsmarkør` | `synlig_markør` | Identitet vist gjennom klær eller ytre tegn (hijab, kippa, kors). | «klesplagg» 38 |
 | religion / `identitetsmarkør` | `fremmedhet_migrasjon` | Religionen brukes som tegn på at noen er fremmed eller innvandrer (muslim = innvandrer). | 2021-rapporten: muslim og innvandrer klynger sammen; abstraktet: «Muslim» signaliserer fremmedhet |
 | religion / `romlig_kulisse` | `veimarkør_landemerke` | Bygget brukes til orientering, stedsangivelse eller som del av bybildet. | «veimarkør» 34, «stedsangivelse» 35, «landemerke» 10, «bybilde» 10 |
-| religion / `romlig_kulisse` | `sosialt_hverdagsrom` | Bygget som møtested eller ramme for hverdagsliv, uten religiøs handling (konsert, møte, lyd fra klokker/bønnerop). | «møtested» 24, «hverdagsliv» 15, «lyd» 12 |
+| religion / `romlig_kulisse` | `sosialt_hverdagsrom` | Bygget som møtested eller ramme for sekulær hverdag (konsert, avtale utenfor, lekeplass ved siden av). Bønn, bønnerop eller deltakelse i religiøst fellesskap er levd_praksis, ikke dette. | «møtested» 24, «hverdagsliv» 15 |
 | religion / `historisk_tematisk` | `historisk_ramme` | Krig, Holocaust, forfølgelse, historiske hendelser. | «historisk» 101, «forfølgelse» 20, «krig» 10 |
 | religion / `historisk_tematisk` | `religionssamtale` | Samtale, undervisning eller refleksjon om religion, tekster, tro og tvil. | «religiøs_tekst» 27, «tolkning» 13, «filosofi» 10, «definisjon» 9 |
 | funksjon / `faktisk_funksjonsnedsettelse` | `hjelpemiddel_i_bruk` | Hjelpemiddelet brukes av en karakter (rullestol, høreapparat, førerhund, stokk). | «hjelpemiddel» 363 |
