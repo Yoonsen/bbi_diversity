@@ -29,7 +29,7 @@ Ord uten tilknytning til målordet øker omtrent i takt med vinduet, og forholde
 
 **Avstand.** Gjennomsnittlig posisjon for x i vinduet rundt y, sammenlignet med midtpunktet i vinduet (forventningen for ord uten tilknytning). Gjennomsnittsavstanden er første moment av fordelingen av x etter avstand til y. Skalaprofilen er den kumulative fordelingen av den samme fordelingen. Artikkelen peker på en skjult premiss: at relevans avtar lineært med avstand, noe oblike objekter bryter med. Når hele profilen brukes i stedet for gjennomsnittet, trengs ikke den premissen. En topp ved 2–3 ord blir synlig.
 
-**Hva som legges til.** Johnsen (2021) arbeider med vinduer *sentrert på målordet*, med retning (venstre eller høyre kontekst). Det er kollokasjon. Blokkene her er en inndeling *uten sentrum*. Det er dispersjon og tema. Skalaprofilen legger begge på samme akse: sentrert vindu (≈ 10–50 ord), blokk (250), sammenslåtte blokker og bok. Dermed får vi en sammenhengende overgang fra kollokasjon til tema. Jaccard-kurvene artikkelen bruker for å sammenligne rangeringer, kan brukes direkte til å måle hvor raskt topplisten endrer seg med *s*.
+**Hva som legges til.** Johnsen (2021) arbeider med vinduer *sentrert på målordet*, med retning (venstre eller høyre kontekst). Det er kollokasjon. Blokkene her er en inndeling *uten sentrum*. Det er dispersjon og tema. Skalaprofilen legger begge på samme akse: sentrert vindu (≈ 10–25 ord), blokk (250), sammenslåtte blokker og bok. Dermed får vi en sammenhengende overgang fra kollokasjon til tema. Jaccard-kurvene artikkelen bruker for å sammenligne rangeringer, kan brukes direkte til å måle hvor raskt topplisten endrer seg med *s*.
 
 ## Tre mål
 
@@ -76,7 +76,7 @@ Assosiasjonsmålet er det klassiske PMI (Church og Hanks 1990), med positiv avka
 
 | Skala | Omtrent | Kilde |
 |---|---|---|
-| Konkordansevindu | 50 ord (25 + 25) | `outputs/full_fiction/concordances_full.jsonl` |
+| Konkordansevindu | 20–25 ord totalt (median 21) | `outputs/full_fiction/concordances_full.jsonl` |
 | Blokk | 250 ord | DHLAB `/chunks`, lagret per bok |
 | Sammenslåtte blokker | 500, 1 000, 2 000 ord | slås sammen fra 250-blokkene |
 | Bok | hele teksten | `book_word_freq.csv`, bokkontrasten (`book_z`) |
