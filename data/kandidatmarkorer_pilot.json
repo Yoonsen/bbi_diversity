@@ -1,0 +1,38 @@
+{
+  "_om": "Første kandidatliste for markørutvidelse (pilot 9.11.2026). Hver kandidat blir sin egen undergruppe 'kand_<ord>' slik at presisjonen måles per kandidat. 'kilde': blokk = PPMI i markørblokker, ramme = bok-kontrast levd/referanse, galakse = samforekomstklynge, kontekst = modellens kontekstord, sammensetning = jokertegnsøk i DHLAB, domene = forslag fra fagkunnskap (ikke datadrevet), kontroll = forventet lav presisjon.",
+  "kandidater": [
+    {"domene": "funksjon", "ord": ["seende"], "kilde": ["blokk", "galakse"]},
+    {"domene": "funksjon", "ord": ["handikap", "handikapet"], "kilde": ["blokk"]},
+    {"domene": "funksjon", "ord": ["invalid", "invalide"], "kilde": ["blokk"]},
+    {"domene": "funksjon", "ord": ["krøpling", "krøplingen", "krøplinger"], "kilde": ["blokk", "galakse"]},
+    {"domene": "funksjon", "ord": ["stum", "stumme"], "kilde": ["blokk", "galakse"]},
+    {"domene": "funksjon", "ord": ["rullestolbrukere", "rullestolene", "rullestolens", "rullestolheis"], "kilde": ["blokk", "sammensetning"]},
+    {"domene": "funksjon", "ord": ["ganghemmet", "ganghemmede", "hørehemmet", "hørehemmede", "talehemmet", "talehemmede"], "kilde": ["sammensetning"]},
+    {"domene": "funksjon", "ord": ["synshemming", "hørselshemming", "funksjonshemming", "funksjonsnedsettelser"], "kilde": ["sammensetning"]},
+    {"domene": "funksjon", "ord": ["tegnspråklig", "tegnspråklige", "tegnspråktolk", "tegnspråktolken"], "kilde": ["sammensetning"]},
+    {"domene": "funksjon", "ord": ["halt", "halte", "haltet", "haltende"], "kilde": ["kontekst"]},
+    {"domene": "funksjon", "ord": ["synet"], "kilde": ["galakse"]},
+    {"domene": "funksjon", "ord": ["autist", "autisten", "autister", "autisme", "autismen", "autistisk", "autistiske"], "kilde": ["sammensetning", "domene"]},
+    {"domene": "funksjon", "ord": ["adhd"], "kilde": ["domene"]},
+    {"domene": "funksjon", "ord": ["utviklingshemmet", "utviklingshemmede", "utviklingshemming"], "kilde": ["domene"]},
+    {"domene": "funksjon", "ord": ["downs"], "kilde": ["domene"]},
+    {"domene": "funksjon", "ord": ["dysleksi", "dyslektiker", "dyslektisk"], "kilde": ["domene"]},
+    {"domene": "funksjon", "ord": ["epilepsi", "epileptisk", "epileptiker"], "kilde": ["domene"]},
+    {"domene": "funksjon", "ord": ["gipset", "gipsen"], "kilde": ["galakse", "kontroll"]},
+
+    {"domene": "flerkulturell", "ord": ["asyl", "asylbarn", "asylant", "asylanter"], "kilde": ["blokk", "galakse", "sammensetning"]},
+    {"domene": "flerkulturell", "ord": ["hjemlandet", "hjemland"], "kilde": ["blokk", "galakse", "kontekst"]},
+    {"domene": "flerkulturell", "ord": ["mottaket", "transittmottak", "transittmottaket"], "kilde": ["blokk", "galakse"]},
+    {"domene": "flerkulturell", "ord": ["mindreårige", "mindreårig"], "kilde": ["blokk", "galakse", "kontekst"]},
+    {"domene": "flerkulturell", "ord": ["utlending", "utlendingen", "utlendinger", "utlendingene"], "kilde": ["blokk"]},
+    {"domene": "flerkulturell", "ord": ["menneskesmuglere", "menneskesmuglerne", "menneskesmugler"], "kilde": ["blokk"]},
+    {"domene": "flerkulturell", "ord": ["papirløs", "papirløse"], "kilde": ["domene"]},
+    {"domene": "flerkulturell", "ord": ["utvist", "utvisning", "utvises"], "kilde": ["galakse", "domene"]},
+    {"domene": "flerkulturell", "ord": ["statsløs", "statsløse", "landflyktig", "landflyktige"], "kilde": ["domene"]},
+    {"domene": "flerkulturell", "ord": ["tilflukt"], "kilde": ["galakse"]},
+    {"domene": "flerkulturell", "ord": ["okkupasjonen"], "kilde": ["galakse"]},
+    {"domene": "flerkulturell", "ord": ["utvandret", "utvandrere", "utvandring", "emigrere", "emigrerte", "emigranter"], "kilde": ["domene"]},
+    {"domene": "flerkulturell", "ord": ["innvandrerbakgrunn", "minoritetsbakgrunn"], "kilde": ["sammensetning", "domene"]},
+    {"domene": "flerkulturell", "ord": ["ulovlig", "ulovlige"], "kilde": ["galakse", "kontekst", "kontroll"]}
+  ]
+}

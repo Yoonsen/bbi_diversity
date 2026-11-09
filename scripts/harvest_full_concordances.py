@@ -146,13 +146,15 @@ def main():
     ap.add_argument("--to-year", type=int, default=2024)
     ap.add_argument("--only", nargs="*", help="restrict to these subgroups")
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--lexicon", type=Path, help="JSON list of [domain, subgroup, [words]] instead of the DHNB 2027 lexicon")
     args = ap.parse_args()
 
     books = load_corpus(args.corpus, args.from_year, args.to_year)
     did2urn = {b["dhlabid"]: u for u, b in books.items() if b["dhlabid"]}
     print(f"Corpus: {len(books)} non-translated Bokmål fiction books {args.from_year}-{args.to_year}")
 
-    lexicon = [t for t in LEXICON if not args.only or t[1] in args.only]
+    base = [tuple(x) for x in json.loads(args.lexicon.read_text(encoding="utf-8"))] if args.lexicon else LEXICON
+    lexicon = [t for t in base if not args.only or t[1] in args.only]
     form2group = {}
     for _, sub, words in lexicon:
         for w in words:
