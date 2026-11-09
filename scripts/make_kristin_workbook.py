@@ -29,7 +29,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import luminon_schema_v2 as S  # noqa: E402
-from harvest_full_concordances import load_corpus  # noqa: E402
+from harvest_full_concordances import first_editions, load_corpus  # noqa: E402
 from lexicon_dhnb2027 import LEXICON  # noqa: E402
 
 MACROS = ["lived", "thematic", "backdrop", "other"]
@@ -94,6 +94,8 @@ def main():
                     help="source of title/authors (kept out of the annotation files)")
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--per-cell", type=int, default=3, help="windows per subgroup x kategori in Lesestikk")
+    ap.add_argument("--keep-editions", action="store_true",
+                    help="keep later editions/reprints (default: only the first edition of each title+author)")
     args = ap.parse_args()
 
     meta = {}
@@ -107,6 +109,11 @@ def main():
         n, p = spec.split("=", 1)
         refs[n] = load(p)
     books = load_corpus(args.corpus, 2000, 2024)
+    n_dropped = 0
+    if not args.keep_editions:
+        books, n_dropped = first_editions(books)
+    main_rows = {i: r for i, r in main_rows.items() if r["urn"] in books}
+    refs = {n: {i: r for i, r in rr.items() if r["urn"] in books} for n, rr in refs.items()}
     titles_per_period = Counter()
     for b in books.values():
         for p0, p1 in PERIODS:
@@ -137,7 +144,8 @@ def main():
     lines = [
         ("Luminon v2.2 – gjennomgang av fullt uttrekk (topp-ned)", F_TITLE),
         ("", F_BASE),
-        (f"Korpus: {len(books)} ikke-oversatte skjønnlitterære barne- og ungdomsbøker på bokmål, 2000–2024 (data/barn.csv etter Kristins redigeringer).", F_BASE),
+        (f"Korpus: {len(books)} ikke-oversatte skjønnlitterære barne- og ungdomsbøker på bokmål, 2000–2024 (data/barn.csv etter Kristins redigeringer"
+         + (f", uten {n_dropped} senere utgaver)." if n_dropped else ")."), F_BASE),
         (f"Konkordanser: {len(main_rows)} vinduer (≤ 25 ord) for 34 undergrupper i fem domener – alle treff, ikke utvalg.", F_BASE),
         (f"Annotering: {main_name} (Anthropic, effort medium) på alle vinduer, skjema {S.SCHEMA_VERSION}. "
          f"Referansemodeller ({', '.join(refs)}) på et stratifisert utvalg på {n_ref} vinduer (30 per undergruppe, fordelt på femårsperioder).", F_BASE),
@@ -160,7 +168,8 @@ def main():
         ("", F_BASE),
         ("Merk", F_BOLD),
         ("Tellingene er beregnet fra annoteringsfilene; prosenter og rater er formler over tellingene. "
-         "45 titler finnes i to utgaver og telles begge – de er ikke fjernet ennå.", F_BASE),
+         + (f"Senere utgaver av samme tittel og forfatter er tatt ut ({n_dropped} bøker); den første utgaven beholdes." if n_dropped
+            else "Alle utgaver er med (også senere utgaver av samme tittel)."), F_BASE),
         ("Vinduene er korte utdrag fra opphavsrettslig beskyttede bøker. Arbeidsboka er for internt forskningsarbeid og skal ikke publiseres.", F_BASE),
     ]
     for i, (text, font) in enumerate(lines, 1):

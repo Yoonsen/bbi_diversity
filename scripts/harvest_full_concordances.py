@@ -71,6 +71,17 @@ def load_corpus(path: Path, y0: int, y1: int) -> dict[str, dict]:
     return books
 
 
+def first_editions(books: dict) -> tuple[dict, int]:
+    """Keep one book per normalized (title, first author): the earliest year, then lowest URN."""
+    groups = defaultdict(list)
+    for u, b in books.items():
+        title = re.sub(r"[^\wæøå]+", " ", b["title"].lower()).strip()
+        author = re.sub(r"\s*,\s*", ",", b["authors"].split("/")[0].lower()).strip()
+        groups[(title, author)].append(u)
+    keep = {min(us, key=lambda u: (books[u]["year"], u)) for us in groups.values()}
+    return {u: b for u, b in books.items() if u in keep}, len(books) - len(keep)
+
+
 def load_previous_ids(paths: list[Path]) -> dict[tuple[str, str], str]:
     """Map (urn, concordance) -> id from the sampled abstract harvest."""
     prev = {}
